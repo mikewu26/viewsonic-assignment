@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task1</title>
+  <style>
+    #container {
+      width: 400px;
+      box-sizing: border-box;
+      border: 1px solid red;
+      padding: 10px 20px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 4px;
+      &.widen {
+        width: 800px;      
+      }
+      &.edit{
+        .text{
+          display: none;
+        }
+        input{
+          display: block;
+        }
+        button.edit {
+          background-color: #317ca7;
+          box-shadow: inset #9b9b9b -1px -1px 2px 1px;
+        }
+      }
+    }
+    button {
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border: 1px solid whitesmoke;
+      background-color: #82c7ef;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: #537ffb;
+      }
+    }
+    input, .text {
+      width: 100%;
+      min-height: 24px;
+      padding: 1px 4px;
+      box-sizing: border-box;
+      font-size: 14px;
+      font-family: monospace;
+    }
+    .text {
+      border: 1px solid transparent;
+      word-break: break-all;
+    }
+    input {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div>
+      <div class="text"></div>
+      <input type="text">
+    </div>
+    <div>
+      <button type="button" class="edit">edit</button>
+      <button type="button" class="resize">resize</button>
+    </div>
+  </div>
+  <script>
+    const container = document.getElementById('container');
+    const edit = container.querySelector('.edit');
+    const resize = container.querySelector('.resize');
+    const input = container.querySelector('input');
+    
+    edit.addEventListener('click', () => {
+      if (container.classList.contains('edit')) {
+        container.querySelector('.text').textContent = input.value;
+        container.classList.remove('edit');
+      } else {
+        input.value = container.querySelector('.text').textContent;
+        container.classList.add('edit');
+        input.focus();
+      }
+    });
+
+    resize.addEventListener('click', () => {
+      container.classList.toggle('widen');
+    });
+  </script>
+</body>
+</html>

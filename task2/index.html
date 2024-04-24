@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task2</title>
+  <style>
+    .duration {
+      font-size: 18px;
+      font-weight: bold;
+      min-height: 24px;
+    }
+    button {
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border: 1px solid whitesmoke;
+      background-color: #82c7ef;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: #537ffb;
+      }
+      &:disabled {
+        background-color: #9b9b9b;
+        cursor: not-allowed;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div>
+      <div class="duration">Duration: </div>
+    </div>
+    <div>
+      <button type="button" class="start">start</button>
+      <button type="button" class="end" disabled>end</button>
+    </div>
+  </div>
+  <script>
+    const container = document.getElementById('container');
+    const start = container.querySelector('.start');
+    const end = container.querySelector('.end');
+    const duration = container.querySelector('.duration');
+    let startTime;
+    start.addEventListener('click', (e) => {
+      startTime = new Date();
+      duration.textContent = 'Duration: ';
+      e.currentTarget.disabled = true;
+      end.disabled = false;
+    });
+    end.addEventListener('click', (e) => {
+      const endTime = new Date();
+      const diff = endTime - startTime;
+      duration.textContent = `Duration: ${diff}ms`;
+      e.currentTarget.disabled = true;
+      start.disabled = false;
+    });
+  </script>
+</body>
+</html>
